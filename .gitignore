@@ -1,0 +1,8 @@
+/.git/
+/.idea/
+*.pyc
+*~
+*.swp
+/basqbot/cogs/testing
+/basqbot/cogs/custom_commands.py
+/basqbot/utils/config.ini
