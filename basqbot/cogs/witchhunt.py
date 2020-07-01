@@ -1,3 +1,4 @@
+import discord
 from discord.ext import commands
 import asyncio
 from colorama import Fore, Style
@@ -19,8 +20,11 @@ class WitchHunt(commands.Cog):
             print(f"{message.content}\nAuthor: {message.author}\n")
             print(Style.RESET_ALL)
             if self.react_enabled:
-                for reaction in self.reactions:
-                    await message.add_reaction(reaction)
+                try:
+                    for reaction in self.reactions:
+                        await message.add_reaction(reaction)
+                except discord.NotFound:
+                    pass
 
     @commands.command()
     async def witch_hunt_enable(self, ctx):
