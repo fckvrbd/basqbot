@@ -13,6 +13,8 @@ class Bot(commands.Bot):
         init()
         self.config = configparser.ConfigParser()
         self.config.read(os.path.join(os.path.dirname(__file__), 'utils', 'config.ini'))
+        self.token = config.get("DISCORD", "TOKEN")
+        self.pwd = config.get("DISCORD", "PASSWORD")
         self.prefix = config.get("DISCORD", "PREFIX")
         super().__init__(command_prefix=self.prefix, case_insensitive=True, self_bot=True)
 
