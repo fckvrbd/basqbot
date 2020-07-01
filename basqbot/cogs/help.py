@@ -60,6 +60,7 @@ class Help(commands.Cog):
                 f'**{prefix}auto_purge_enable (time)** Deletes messages after amount of time in seconds\n'
                 f'**{prefix}auto_purge_disable** Disables `auto_purge_enable`'
                 , inline=False)
+            embed.set_footer(text="1/2")
         elif page == 2:
             embed.add_field(
                 name='**__Raid:__**',
@@ -89,6 +90,7 @@ class Help(commands.Cog):
                       f'**{prefix}witch_hunt_react_enable** Starts reacting given reactions to the witch hunted users.\n'
                       f'**{prefix}witch_hunt_react_disable** Disables `witch_hunt_react_enable`.\n'
                 , inline=False)
+            embed.set_footer(text="1/2")
         embed.set_author(
             name=self.bot.user,
             icon_url=self.bot.user.avatar_url)
