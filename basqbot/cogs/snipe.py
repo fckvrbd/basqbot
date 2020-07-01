@@ -7,15 +7,17 @@ class Snipe(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.cache = {}
-        self.guild_id = None
 
     @commands.Cog.listener()
     async def on_raw_message_delete(self, payload):
         message = payload.cached_message
         if message is None:
             return
-        self.guild_id = payload.guild_id
-        self.add_cache(message, payload.channel_id, self.guild_id)
+        if payload.guild_id:
+            guild_id = payload.guild_id
+            self.add_cache(message, payload.channel_id, guild_id)
+        else:
+            self.add_cache(message, payload.channel_id, None)
 
     def add_cache(self, message, channel, guild):
         if guild is not None:
@@ -36,7 +38,8 @@ class Snipe(commands.Cog):
     @commands.command()
     async def snipe(self, ctx):
         """Gets last deleted message from guild / DM and sends it."""
-        if self.guild_id is not None:
+        await ctx.message.delete()
+        if ctx.message.guild:
             guild_cache = self.cache.get(ctx.guild.id, None)
             channel_cache = guild_cache.get(ctx.channel.id, None)
         else:
