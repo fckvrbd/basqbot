@@ -9,7 +9,6 @@ class Misc(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.typing = False
-        self.enabled = False
         self.avatar = None
 
     @commands.command()
