@@ -90,7 +90,7 @@ class Help(commands.Cog):
                       f'**{prefix}witch_hunt_react_enable** Starts reacting given reactions to the witch hunted users.\n'
                       f'**{prefix}witch_hunt_react_disable** Disables `witch_hunt_react_enable`.\n'
                 , inline=False)
-            embed.set_footer(text="1/2")
+            embed.set_footer(text="2/2")
         embed.set_author(
             name=self.bot.user,
             icon_url=self.bot.user.avatar_url)
