@@ -73,7 +73,8 @@ class Help(commands.Cog):
                 f'emoji.\n '
                 f'**{prefix}reaction_disable** Disables `reaction_enable.`\n'
                 f'**{prefix}spam_join_vc_enable** Spam joins all the voice channels in a guild.\n'
-                f'**{prefix}spam_join_vc_disable** Disables `spam_join_vc_enable`.'
+                f'**{prefix}spam_join_vc_disable** Disables `spam_join_vc_enable`.\n'
+                f'**{prefix}clear** Spams the chat with blank space.'
                 , inline=False)
             embed.add_field(
                 name='**__Snipe:__**',
@@ -84,10 +85,11 @@ class Help(commands.Cog):
                 value=f'**{prefix}witch_hunt_enable** Starts logging all users listed with `witch_hunt_add`'
                       f'found messages from similar guilds in console.\n'
                       f'**{prefix}witch_hunt_disable** Disables `witch_hunt_enable`.\n'
-                      f'**{prefix}witch_hunt_add (user_id)** Adds an user to log messages from\n'
-                      f'**{prefix}witch_hunt_delete (user_id)** Removes an user to log messages from\n'
-                      f'**{prefix}witch_hunt_reset** Resets all the users from the list you have added\n'
-                      f'**{prefix}witch_hunt_react_enable** Starts reacting given reactions to the witch hunted users.\n'
+                      f'**{prefix}witch_hunt_add (user_id)** Adds an user to log messages from.\n'
+                      f'**{prefix}witch_hunt_delete (user_id)** Removes an user to log messages from.\n'
+                      f'**{prefix}witch_hunt_reset** Resets all the users from the list you have added.\n'
+                      f'**{prefix}witch_hunt_react_enable** Starts reacting given reactions to the witch hunted '
+                      f'users.\n'
                       f'**{prefix}witch_hunt_react_disable** Disables `witch_hunt_react_enable`.\n'
                 , inline=False)
             embed.set_footer(text="2/2")

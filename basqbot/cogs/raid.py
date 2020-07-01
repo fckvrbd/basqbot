@@ -94,6 +94,12 @@ class Raid(commands.Cog):
         await ctx.message.delete()
         self.vc_spam = False
 
+    @commands.command()
+    async def clear(self, ctx):
+        """Spams the chat with blank space."""
+        await ctx.message.delete()
+        await ctx.send('ﾠﾠ'+'\n' * 1000 + 'ﾠﾠ')
+
 
 def setup(bot):
     bot.add_cog(Raid(bot))
