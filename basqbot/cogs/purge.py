@@ -35,7 +35,6 @@ class Purge(commands.Cog):
                     async for message in channel.history(limit=limit):
                         if self.check_author(message):
                             await message.delete()
-                            print("Deleting message: {} sent on {}".format(message.clean_content, message.created_at))
                 except discord.Forbidden:
                     pass
         else:
