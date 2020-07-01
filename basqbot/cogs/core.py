@@ -38,10 +38,8 @@ class Core(commands.Cog):
             description="Prefix has been changed to **{}**".format(prefix),
             color=0x00BFFF)
         embed.set_author(name=f"{ctx.message.author}", icon_url=ctx.message.author.avatar_url)
-        alert = await ctx.send(embed=embed)
+        await ctx.send(embed=embed, delete_after=5.0)
         print("Prefix has changed to {}".format(prefix))
-        await asyncio.sleep(10)
-        await alert.delete()
 
 
 def setup(bot):

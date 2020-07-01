@@ -54,9 +54,8 @@ class Bot(commands.Bot):
                 Try using **__{}help__** for a list of commands.".format(self.command_prefix)
         else:
             raise exception
-        error = await context.send(embed=embed)
-        await asyncio.sleep(10)
-        await context.message.delete(), await error.delete()
+        await context.message.delete(delay=10.0)
+        await context.send(embed=embed, delete_after=10.0)
 
 
 def main(token):

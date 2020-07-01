@@ -72,7 +72,7 @@ class Misc(commands.Cog):
         try:
             await self.bot.user.edit(password=self.bot.pwd, avatar=await self.avatar.read())
         except discord.HTTPException:
-            await ctx.send("Changing avatar too fast, try again later.", delete_after)
+            await ctx.send("Changing avatar too fast, try again later.", delete_after=5)
 
 
 def setup(bot):
