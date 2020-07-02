@@ -18,61 +18,42 @@ class Raid(commands.Cog):
             for reaction in self.reactions:
                 await message.add_reaction(reaction)
 
-    @commands.command()
+    @commands.command(description="Adds amount of channels with optional name.")
     async def add_channels(self, ctx, amount: int, name=None):
-        """Adds amount of channels with optional name.
-
-        Keyword arguments:
-            amount (int) -- The amount of channels needed to be made.
-            name (str) -- The name you want to name the channels. (default: None)
-        """
         await ctx.message.delete()
         for _ in range(amount):
             if name is None:
                 name = ''.join(random.choice(string.ascii_uppercase) for _ in range(32))
             await ctx.guild.create_text_channel(str(name))
 
-    @commands.command()
+    @commands.command(description="Deletes all channels in guild.")
     async def delete_channels(self, ctx):
-        """Deletes all channels in guild."""
         for channel in ctx.guild.channels:
             await channel.delete()
 
-    @commands.command()
+    @commands.command(description="Adds reactions to all incoming messages in guild where possible.")
     async def reaction_enable(self, ctx, *reactions):
-        """Adds reactions to all incoming messages in guild where possible.
-
-        Keyword arguments:
-            *reactions (str) -- The emoji's you want to react with.
-        """
         await ctx.message.delete()
         self.guild = ctx.guild.id
         self.reactions = reactions
         self.bot.add_listener(self.auto_react, 'on_message')
 
-    @commands.command()
+    @commands.command(description="Disables 'reaction_enable'.")
     async def reaction_disable(self, ctx):
-        """Disables 'reaction_enable'."""
         await ctx.message.delete()
         self.guild = None
         self.reactions = []
         self.bot.remove_listener(self.auto_react, 'on_message')
 
-    @commands.command()
+    @commands.command(description="Adds reaction to all messages found in guild.")
     async def reaction_spam(self, ctx, *reactions):
-        """Adds reaction to all messages found in guild.
-
-        Keyword arguments:
-            *reactions (str) -- The emoji's you want to react with.
-        """
         await ctx.message.delete()
         async for message in ctx.channel.history():
             for reaction in reactions:
                 await message.add_reaction(reaction)
 
-    @commands.command()
+    @commands.command(description="Repeatedly joins all voice chats in guild.")
     async def spam_join_vc_enable(self, ctx):
-        """Repeatedly joins all voice chats in guild."""
         await ctx.message.delete()
         self.vc_spam = True
         voice = get(self.bot.voice_clients, guild=ctx.guild)
@@ -86,15 +67,13 @@ class Raid(commands.Cog):
             await voice.disconnect()
         await voice.disconnect(force=True)
 
-    @commands.command()
+    @commands.command(description="Disables 'spam_join_vc_enable'.")
     async def spam_join_vc_disable(self, ctx):
-        """Disables 'spam_join_vc_enable'."""
         await ctx.message.delete()
         self.vc_spam = False
 
-    @commands.command()
+    @commands.command(description="Spams the chat with blank space.")
     async def clear(self, ctx):
-        """Spams the chat with blank space."""
         await ctx.message.delete()
         await ctx.send('ﾠﾠ'+'\n' * 1996 + 'ﾠﾠ')
 

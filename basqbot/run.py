@@ -54,6 +54,11 @@ class Bot(commands.Bot):
             embed.description = \
                 "Bad argument\n \
                 Try using **__{}help__** for a list of commands.".format(self.command_prefix)
+
+        elif isinstance(exception, AttributeError):
+            embed.description = \
+                "Argument not found\n \
+                Try using **__{}help__** for a list of commands.".format(self.command_prefix)
         else:
             raise exception
         await context.message.delete(delay=10.0)

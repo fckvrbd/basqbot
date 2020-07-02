@@ -35,7 +35,7 @@ class Snipe(commands.Cog):
                 "author": message.author,
                 "time": message.created_at}
 
-    @commands.command()
+    @commands.command(description="Gets last deleted message from guild / DM and sends it.")
     async def snipe(self, ctx):
         """Gets last deleted message from guild / DM and sends it."""
         await ctx.message.delete()

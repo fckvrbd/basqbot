@@ -26,14 +26,8 @@ class Rule34(commands.Cog):
         response.close()
         return image
 
-    @commands.command()
+    @commands.command(description="Parses a select amount of rule34 images with query given.")
     async def r34(self, ctx, query: str, amount: int = 1):
-        """Parses a select amount of rule34 images with query given.
-
-        Keyword arguments:
-            query (str) -- The type of image you want to look for.
-            amount (int) -- The amount of images you want. (default: 1)
-        """
         await ctx.message.delete()
         embed = discord.Embed(colour=0xf700ff, title=query)
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)

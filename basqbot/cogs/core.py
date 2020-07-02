@@ -10,20 +10,15 @@ class Core(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(description="Closes the bot.")
     async def exit(self, ctx):
-        """Closes the bot."""
         await ctx.message.delete()
         print("Closing...")
         await self.bot.close()
         sys.exit()
 
-    @commands.command()
+    @commands.command(description="Changes the prefix used for commands.")
     async def change_prefix(self, ctx, prefix: str):
-        """Changes the prefix used for commands.
-
-        Keyword arguments:
-            prefix (string) -- The new prefix for bot commands which will be used."""
         await ctx.message.delete()
         config = configparser.ConfigParser()
         file = os.path.join(os.path.dirname(__file__), '..', 'utils', 'config.ini')

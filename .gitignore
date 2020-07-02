@@ -4,5 +4,5 @@
 *~
 *.swp
 /basqbot/cogs/testing
-/basqbot/cogs/custom_commands.py
+/basqbot/cogs/testing/custom_commands.py
 /basqbot/utils/config.ini

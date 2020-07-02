@@ -18,13 +18,8 @@ class Purge(commands.Cog):
     def check_author(self, msg):
         return msg.author == self.bot.user and not msg.is_system()
 
-    @commands.command()
+    @commands.command(description="Deletes all messages in guild channels or DM chat.")
     async def purge(self, ctx, limit=float("inf")):
-        """Deletes all messages in guild channels or DM chat.
-
-        Keyword arguments:
-            limit (float) -- The amount of messages being deleted (default: float("inf"))
-        """
         await ctx.message.delete()
         if ctx.guild:
             for channel in ctx.guild.text_channels:
@@ -39,20 +34,14 @@ class Purge(commands.Cog):
                 if self.check_author(message):
                     await message.delete()
 
-    @commands.command()
+    @commands.command(description="Auto-deletes bots user messages after a given time in seconds.")
     async def auto_purge_enable(self, ctx, time=60):
-        """Auto-deletes bots user messages after a given time in seconds.
-
-        Keyword arguments:
-            time (int) -- Amount of time messages will be deleted after.
-        """
         await ctx.message.delete()
         self.time = time
         self.bot.add_listener(self.auto_purge, 'on_message')
 
-    @commands.command()
+    @commands.command(description="Disables 'auto_purge_enable'.")
     async def auto_purge_disable(self, ctx):
-        """Disables 'auto_purge_enable'."""
         await ctx.message.delete()
         self.time = None
         self.bot.remove_listener(self.auto_purge, 'on_message')

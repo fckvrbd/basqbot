@@ -7,12 +7,8 @@ class Info(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
+    @commands.command(description="Show info of given user.")
     async def user_info(self, ctx, user: discord.User):
-        """Show info of given user.
-
-        Keyword arguments:
-            user (discord.User) -- The user given to investigate."""
         embed = discord.Embed(
             title=user.name,
             description=user.id, 
@@ -24,9 +20,8 @@ class Info(commands.Cog):
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
         await ctx.send(embed=embed)
 
-    @commands.command()
+    @commands.command(description="Show info of server.")
     async def server_info(self, ctx):
-        """Show info of server."""
         server = ctx.message.guild
         embed = discord.Embed(
             title=server.name,
@@ -42,13 +37,8 @@ class Info(commands.Cog):
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
         await ctx.send(embed=embed)
 
-    '''Shows avatar of specified user'''
-    @commands.command()
+    @commands.command(description="Show avatar of given user.")
     async def avatar(self, ctx, user: discord.User):
-        """Show avatar of given user.
-
-        Keyword arguments:
-            user (discord.User) -- The user given to investigate."""
         embed = discord.Embed(
             title=user.name,
             color=0xFF0000)
