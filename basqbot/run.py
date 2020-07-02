@@ -42,6 +42,7 @@ class Bot(commands.Bot):
         ''')
         print(Style.RESET_ALL)
         print(Fore.LIGHTRED_EX + "Name: {} - User-ID: {}".format(self.user, self.user.id))
+        print("Prefix: {}".format(self.prefix))
         version = "Version: {}".format(__version__)
         if __version__ != self.check_version():
             version += " | The version of this bot is outdated! We recommend you to use version {} instead."\
