@@ -65,7 +65,7 @@ class Misc(commands.Cog):
 
     @commands.command()
     async def reset_avatar(self, ctx):
-        """Steals avatar from user and changes to it."""
+        """Resets avatar back to original."""
         await ctx.message.delete()
         try:
             await self.bot.user.edit(password=self.bot.pwd, avatar=await self.avatar.read())

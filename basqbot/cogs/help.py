@@ -44,8 +44,8 @@ class Help(commands.Cog):
                 f'**{prefix}b64decode (arg)** Decodes message from base64.\n'
                 f'**{prefix}typing_enable** Fake types until disabled.\n'
                 f'**{prefix}typing_disable** Disables `typing_enable`.\n'
-                f'**{prefix}purge (limit)** Deletes amount of messages set with `limit` in guild channels or DM chat '
-                f'(__might take a while__).\n '
+                f'**{prefix}steal_avatar** Steals avatar from Discord user and sets it as your own.\n'
+                f'**{prefix}reset_avatar** Changes avatar back to your original.\n'
                 , inline=False)
             embed.add_field(
                 name='**__NSFW:__**',
@@ -59,7 +59,7 @@ class Help(commands.Cog):
                 f'**{prefix}auto_purge_enable (time)** Deletes messages after amount of time in seconds\n'
                 f'**{prefix}auto_purge_disable** Disables `auto_purge_enable`'
                 , inline=False)
-            embed.set_footer(text="1/2")
+            embed.set_footer(text="Help page 1/2")
         elif page == 2:
             embed.add_field(
                 name='**__Raid:__**',
@@ -91,7 +91,7 @@ class Help(commands.Cog):
                       f'users.\n'
                       f'**{prefix}witch_hunt_react_disable** Disables `witch_hunt_react_enable`.\n'
                 , inline=False)
-            embed.set_footer(text="2/2")
+            embed.set_footer(text="Help page 2/2")
         embed.set_author(
             name=self.bot.user,
             icon_url=self.bot.user.avatar_url)
