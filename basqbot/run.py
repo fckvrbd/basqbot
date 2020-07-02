@@ -1,15 +1,16 @@
 from utils.version import __version__
 import discord
 from discord.ext import commands
-import asyncio
 from colorama import init, Fore, Style
 import configparser
+import ctypes
 import os
 import sys
 
 
 class Bot(commands.Bot):
     def __init__(self):
+        self.window_name = ctypes.windll.kernel32.SetConsoleTitleW("Connecting...")
         init()
         self.config = configparser.ConfigParser()
         self.config.read(os.path.join(os.path.dirname(__file__), 'utils', 'config.ini'))
@@ -19,6 +20,9 @@ class Bot(commands.Bot):
         super().__init__(command_prefix=self.prefix, case_insensitive=True, self_bot=True)
 
     async def on_connect(self):
+        self.window_name = ctypes.windll.kernel32.SetConsoleTitleW("Basqbot connected! | {} | {}".format(
+            self.user, self.user.id
+        ))
         print(Fore.RED + r'''
      ▄▄▄▄    ▄▄▄        ██████   █████   ▄▄▄▄    ▒█████  ▄▄▄█████▓
     ▓█████▄ ▒████▄    ▒██    ▒ ▒██▓  ██▒▓█████▄ ▒██▒  ██▒▓  ██▒ ▓▒
