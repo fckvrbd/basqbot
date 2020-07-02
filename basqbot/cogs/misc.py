@@ -44,8 +44,7 @@ class Misc(commands.Cog):
         await ctx.message.delete()
         self.typing = True
         while self.typing:
-            await ctx.trigger_typing()
-            await asyncio.sleep(9)
+            await ctx.trigger_typing(), await asyncio.sleep(9)
 
     @commands.command()
     async def typing_disable(self, ctx):

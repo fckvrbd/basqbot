@@ -7,7 +7,6 @@ import sys
 
 class Core(commands.Cog):
     """Core for the bot, includes help and exit."""
-
     def __init__(self, bot):
         self.bot = bot
 

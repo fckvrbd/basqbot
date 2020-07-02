@@ -17,7 +17,7 @@ class Bot(commands.Bot):
         self.token = config.get("DISCORD", "TOKEN")
         self.pwd = config.get("DISCORD", "PASSWORD")
         self.prefix = config.get("DISCORD", "PREFIX")
-        super().__init__(command_prefix=self.prefix, case_insensitive=True, self_bot=True)
+        super().__init__(command_prefix=self.prefix, help_command=None, case_insensitive=True, self_bot=True)
 
     async def on_connect(self):
         self.window_name = ctypes.windll.kernel32.SetConsoleTitleW("Basqbot connected! | {} | {}".format(

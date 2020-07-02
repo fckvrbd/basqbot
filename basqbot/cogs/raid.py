@@ -9,15 +9,12 @@ class Raid(commands.Cog):
     """Raids guilds and channels."""
     def __init__(self, bot):
         self.bot = bot
-        self.reaction_enabled = False
         self.vc_spam = False
         self.guild = None
         self.reactions = []
 
-    @commands.Cog.listener()
-    async def on_message(self, message):
-        if message.guild and message.guild.id == self.guild and self.reaction_enabled and \
-                message.author.id != self.bot.user.id:
+    async def auto_react(self, message):
+        if message.guild and message.guild.id == self.guild and message.author.id != self.bot.user.id:
             for reaction in self.reactions:
                 await message.add_reaction(reaction)
 
@@ -49,15 +46,17 @@ class Raid(commands.Cog):
             *reactions (str) -- The emoji's you want to react with.
         """
         await ctx.message.delete()
-        self.reaction_enabled = True
         self.guild = ctx.guild.id
         self.reactions = reactions
+        self.bot.add_listener(self.auto_react, 'on_message')
 
     @commands.command()
     async def reaction_disable(self, ctx):
         """Disables 'reaction_enable'."""
         await ctx.message.delete()
-        self.reaction_enabled = False
+        self.guild = None
+        self.reactions = []
+        self.bot.remove_listener(self.auto_react, 'on_message')
 
     @commands.command()
     async def reaction_spam(self, ctx, *reactions):
@@ -81,8 +80,7 @@ class Raid(commands.Cog):
             for vc in ctx.guild.voice_channels:
                 if vc.permissions_for(ctx.author).connect:
                     if voice:
-                        await voice.move_to(vc)
-                        await asyncio.sleep(1)
+                        await voice.move_to(vc), await asyncio.sleep(1)
                     else:
                         voice = await vc.connect()
             await voice.disconnect()

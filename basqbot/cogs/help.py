@@ -3,10 +3,9 @@ from discord.ext import commands
 
 
 class Help(commands.Cog):
-    """Core for the bot, includes help and exit."""
+    """Shows help of commands."""
     def __init__(self, bot):
         self.bot = bot
-        self.bot.remove_command('help')
 
     @commands.command()
     async def help(self, ctx, page: int = 1):

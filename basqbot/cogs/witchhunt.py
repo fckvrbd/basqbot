@@ -13,30 +13,31 @@ class WitchHunt(commands.Cog):
         self.reactions = []
         self.users = []
 
-    @commands.Cog.listener()
-    async def on_message(self, message):
-        if self.enabled and message.author.id in self.users:
+    async def witch_hunt_log(self, message):
+        if message.author.id in self.users:
             print(Fore.MAGENTA + "WITCH_HUNT MESSAGE")
             print(f"{message.content}\nAuthor: {message.author}\n")
             print(Style.RESET_ALL)
-            if self.react_enabled:
-                try:
-                    for reaction in self.reactions:
-                        await message.add_reaction(reaction)
-                except discord.NotFound:
-                    pass
+
+    async def witch_hunt_react(self, message):
+        if message.author.id in self.users:
+            try:
+                for reaction in self.reactions:
+                    await message.add_reaction(reaction)
+            except discord.NotFound:
+                pass
 
     @commands.command()
     async def witch_hunt_enable(self, ctx):
         """Starts the witch hunt and starts logging added users their messages in console."""
         await ctx.message.delete()
-        self.enabled = True
+        self.bot.add_listener(self.witch_hunt_log, 'on_message')
 
     @commands.command()
     async def witch_hunt_disable(self, ctx):
         """Disables 'witch_hunt_disable'."""
         await ctx.message.delete()
-        self.enabled = False
+        self.bot.remove_listener(self.witch_hunt_log, 'on_message')
 
     @commands.command()
     async def witch_hunt_add(self, ctx, user: int):
@@ -85,15 +86,15 @@ class WitchHunt(commands.Cog):
             *reactions (list) -- The reactions you want to add
         """
         await ctx.message.delete()
-        self.react_enabled = True
         for reaction in reactions:
             self.reactions.append(reaction)
+        self.bot.add_listener(self.witch_hunt_react, 'on_message')
 
     @commands.command()
     async def witch_hunt_react_disable(self, ctx):
         """Disables 'witch_hunt_react_enable'."""
         await ctx.message.delete()
-        self.react_enabled = False
+        self.bot.remove_listener(self.witch_hunt_react, 'on_message')
 
 
 def setup(bot):

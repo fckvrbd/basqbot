@@ -1,20 +1,17 @@
 import discord
 from discord.ext import commands
-import asyncio
 
 
 class Purge(commands.Cog):
     """Deletes user messages manually or automatically."""
     def __init__(self, bot):
         self.bot = bot
-        self.enabled = False
         self.time = 60
 
-    @commands.Cog.listener()
-    async def on_message(self, message):
-        if self.enabled and self.check_author(message) and message.author.id == self.bot.user.id:
+    async def auto_purge(self, message):
+        if self.check_author(message) and message.author.id == self.bot.user.id:
             try:
-                await asyncio.sleep(self.time), await message.delete()
+                await message.delete(delay=self.time)
             except discord.errors.NotFound:
                 pass
 
@@ -50,14 +47,15 @@ class Purge(commands.Cog):
             time (int) -- Amount of time messages will be deleted after.
         """
         await ctx.message.delete()
-        self.enabled = True
         self.time = time
+        self.bot.add_listener(self.auto_purge, 'on_message')
 
     @commands.command()
     async def auto_purge_disable(self, ctx):
         """Disables 'auto_purge_enable'."""
         await ctx.message.delete()
-        self.enabled = False
+        self.time = None
+        self.bot.remove_listener(self.auto_purge, 'on_message')
 
 
 def setup(bot):
