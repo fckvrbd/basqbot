@@ -5,6 +5,7 @@ from colorama import init, Fore, Style
 import configparser
 import ctypes
 import os
+import requests
 
 
 class Bot(commands.Bot):
@@ -16,6 +17,12 @@ class Bot(commands.Bot):
         self.token, self.pwd = self.config.get("DISCORD", "TOKEN"), self.config.get("DISCORD", "PASSWORD")
         self.prefix = self.config.get("DISCORD", "PREFIX")
         super().__init__(command_prefix=self.prefix, help_command=None, case_insensitive=True, self_bot=True)
+
+    @staticmethod
+    def check_version():
+        params = {"accept": "application/vnd.github.v3+json"}
+        response = requests.get(url="https://api.github.com/repos/fckvrbd/basqbot/releases/latest", params=params)
+        return response.json().get("tag_name")
 
     async def on_connect(self):
         self.window_name = ctypes.windll.kernel32.SetConsoleTitleW("Basqbot connected! | {} | {}".format(
@@ -35,8 +42,13 @@ class Bot(commands.Bot):
         ''')
         print(Style.RESET_ALL)
         print(Fore.LIGHTRED_EX + "Name: {} - User-ID: {}".format(self.user, self.user.id))
-        print("Version: {}".format(__version__))
-        print(Style.RESET_ALL)
+        version = "Version: {}".format(__version__)
+        if __version__ != self.check_version():
+            version += " | The version of this bot is outdated! We recommend you to use version {} instead."\
+                .format(self.check_version())
+        else:
+            version += " | You're up-to-date!"
+        print(version + Style.RESET_ALL + "\n")
         print("Basqbot Ready!\n")
 
     async def on_command_error(self, context, exception):
