@@ -5,7 +5,6 @@ from colorama import init, Fore, Style
 import configparser
 import ctypes
 import os
-import sys
 
 
 class Bot(commands.Bot):
@@ -14,9 +13,8 @@ class Bot(commands.Bot):
         init()
         self.config = configparser.ConfigParser()
         self.config.read(os.path.join(os.path.dirname(__file__), 'utils', 'config.ini'))
-        self.token = config.get("DISCORD", "TOKEN")
-        self.pwd = config.get("DISCORD", "PASSWORD")
-        self.prefix = config.get("DISCORD", "PREFIX")
+        self.token, self.pwd = self.config.get("DISCORD", "TOKEN"), self.config.get("DISCORD", "PASSWORD")
+        self.prefix = self.config.get("DISCORD", "PREFIX")
         super().__init__(command_prefix=self.prefix, help_command=None, case_insensitive=True, self_bot=True)
 
     async def on_connect(self):
@@ -62,7 +60,16 @@ class Bot(commands.Bot):
         await context.send(embed=embed, delete_after=10.0)
 
 
-def main(token):
+def main():
+    print("Getting token...")
+    config = configparser.ConfigParser()
+    try:
+        config.read(os.path.join(os.path.dirname(__file__), 'utils', 'config.ini'))
+        token = config.get("DISCORD", "TOKEN")
+        print("Token found!")
+    except (configparser.NoOptionError, configparser.NoSectionError):
+        print("No token found! Please run setup.py first.")
+        return
     bot = Bot()
     for filename in os.listdir("cogs"):
         if filename.endswith(".py"):
@@ -71,17 +78,8 @@ def main(token):
         bot.run(token, bot=False)
     except KeyboardInterrupt:
         print("\nScript stopped!")
-        sys.exit()
+        return
 
 
 if __name__ == "__main__":
-    print("Getting token...")
-    config = configparser.ConfigParser()
-    try:
-        config.read(os.path.join(os.path.dirname(__file__), 'utils', 'config.ini'))
-        login = config.get("DISCORD", "TOKEN")
-        print("Token found!")
-    except (configparser.NoOptionError, configparser.NoSectionError):
-        print("No token found! Please run setup.py first.")
-        sys.exit()
-    main(login)
+    main()
