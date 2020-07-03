@@ -20,7 +20,7 @@ class Help(commands.Cog):
             for command in cog.get_commands():
                 cmds.append("**{}{}** -- {}".format(self.bot.prefix, command.name, command.description))
             embed.add_field(name="**__{}:__**".format(cog.qualified_name), value="\n".join(cmds), inline=False)
-            if num != 0 and num % 6 == 0:
+            if num != 0 and num % 3 == 0:
                 await ctx.send(embed=embed)
                 embed.clear_fields()
                 cmds.clear()
