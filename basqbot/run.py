@@ -13,6 +13,7 @@ class Bot(commands.Bot):
         self.window_name = ctypes.windll.kernel32.SetConsoleTitleW("Connecting...")
         init()
         self.config = configparser.ConfigParser()
+        self.version = __version__
         self.config.read(os.path.join(os.path.dirname(__file__), 'utils', 'config.ini'))
         self.token, self.pwd = self.config.get("DISCORD", "TOKEN"), self.config.get("DISCORD", "PASSWORD")
         self.prefix = self.config.get("DISCORD", "PREFIX")
@@ -44,7 +45,7 @@ class Bot(commands.Bot):
         print(Fore.LIGHTRED_EX + "Name: {} - User-ID: {}".format(self.user, self.user.id))
         print("Prefix: {}".format(self.prefix))
         version = "Version: {}".format(__version__)
-        if __version__ != self.check_version():
+        if self.version != self.check_version():
             version += " | The version of this bot is outdated! We recommend you to use version {} instead."\
                 .format(self.check_version())
         else:
