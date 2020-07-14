@@ -17,7 +17,7 @@ class Bot(commands.Bot):
         self.config.read(os.path.join(os.path.dirname(__file__), 'utils', 'config.ini'))
         self.token, self.pwd = self.config.get("DISCORD", "TOKEN"), self.config.get("DISCORD", "PASSWORD")
         self.prefix = self.config.get("DISCORD", "PREFIX")
-        super().__init__(command_prefix=self.prefix, help_command=None, case_insensitive=True, self_bot=True)
+        super().__init__(command_prefix=self.prefix, help_command=None, case_insensitive=True)
 
     @staticmethod
     def check_version():

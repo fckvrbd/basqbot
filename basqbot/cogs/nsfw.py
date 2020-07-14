@@ -19,7 +19,6 @@ class Nsfw(commands.Cog):
 
     @commands.command(description="Sends an amount of random anal images.")
     async def anal(self, ctx, amount: int = 1):
-        await ctx.message.delete()
         embed = discord.Embed(colour=0xf700ff, title="Anal")
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
         for i in range(amount):
@@ -29,7 +28,6 @@ class Nsfw(commands.Cog):
 
     @commands.command(description="Sends an amount of random blowjob images.")
     async def blowjob(self, ctx, amount: int = 1):
-        await ctx.message.delete()
         embed = discord.Embed(colour=0xf700ff, title="Blowjob")
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
         for i in range(amount):
@@ -39,7 +37,6 @@ class Nsfw(commands.Cog):
 
     @commands.command(description="Sends an amount of random boobs images.")
     async def boobs(self, ctx, amount: int = 1):
-        await ctx.message.delete()
         embed = discord.Embed(colour=0xf700ff, title="Boobs")
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
         for i in range(amount):
@@ -49,7 +46,6 @@ class Nsfw(commands.Cog):
 
     @commands.command(description="Sends an amount of random cum images.")
     async def cum(self, ctx, amount: int = 1):
-        await ctx.message.delete()
         embed = discord.Embed(colour=0xf700ff, title="Cum")
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
         for i in range(amount):
@@ -59,7 +55,6 @@ class Nsfw(commands.Cog):
 
     @commands.command(description="Sends an amount of random hentai images.")
     async def hentai(self, ctx, amount: int = 1):
-        await ctx.message.delete()
         embed = discord.Embed(colour=0xf700ff, title="Hentai")
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
         for i in range(amount):
@@ -69,7 +64,6 @@ class Nsfw(commands.Cog):
 
     @commands.command(description="Sends an amount of random hug images.")
     async def hug(self, ctx, amount: int = 1):
-        await ctx.message.delete()
         embed = discord.Embed(colour=0xf700ff, title="Hug")
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
         for i in range(amount):
@@ -79,7 +73,6 @@ class Nsfw(commands.Cog):
 
     @commands.command(description="Sends an amount of random neko images.")
     async def neko(self, ctx, amount: int = 1):
-        await ctx.message.delete()
         embed = discord.Embed(colour=0xf700ff, title="Neko")
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
         for i in range(amount):
@@ -89,7 +82,6 @@ class Nsfw(commands.Cog):
 
     @commands.command(description="Sends an amount of random solo images.")
     async def solo(self, ctx, amount: int = 1):
-        await ctx.message.delete()
         embed = discord.Embed(colour=0xf700ff, title="Solo")
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
         for i in range(amount):
@@ -99,7 +91,6 @@ class Nsfw(commands.Cog):
 
     @commands.command(description="Sends an amount of random spank images.")
     async def spank(self, ctx, amount: int = 1):
-        await ctx.message.delete()
         embed = discord.Embed(colour=0xf700ff, title="Spank")
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
         for i in range(amount):
@@ -109,7 +100,6 @@ class Nsfw(commands.Cog):
 
     @commands.command(description="Sends an amount of random trap images.")
     async def trap(self, ctx, amount: int = 1):
-        await ctx.message.delete()
         embed = discord.Embed(colour=0xf700ff, title="Trap")
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
         for i in range(amount):
@@ -119,7 +109,6 @@ class Nsfw(commands.Cog):
 
     @commands.command(description="Sends an amount of random yuri images.")
     async def yuri(self, ctx, amount: int = 1):
-        await ctx.message.delete()
         embed = discord.Embed(colour=0xf700ff, title="Yuri")
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
         for i in range(amount):
@@ -129,7 +118,6 @@ class Nsfw(commands.Cog):
 
     @commands.command(description="Automatically sends hentai with specified interval.")
     async def auto_hentai_enable(self, ctx, time: int = 60):
-        await ctx.message.delete()
         self.auto_hentai = True
         embed = discord.Embed(colour=0xf700ff, title="Hentai")
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
@@ -139,12 +127,10 @@ class Nsfw(commands.Cog):
 
     @commands.command(description="Disables `auto_hentai_enable`.")
     async def auto_hentai_disable(self, ctx):
-        await ctx.message.delete()
         self.auto_hentai = False
 
     @commands.command(description="Parses a select amount of rule34 images with query given.")
     async def r34(self, ctx, query: str, amount: int = 1):
-        await ctx.message.delete()
         embed = discord.Embed(colour=0xf700ff, title=query)
         embed.set_author(name=self.bot.user, icon_url=self.bot.user.avatar_url)
         for i in range(amount):

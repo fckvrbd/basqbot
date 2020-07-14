@@ -38,7 +38,6 @@ class Snipe(commands.Cog):
     @commands.command(description="Gets last deleted message from guild / DM and sends it.")
     async def snipe(self, ctx):
         """Gets last deleted message from guild / DM and sends it."""
-        await ctx.message.delete()
         if ctx.message.guild:
             guild_cache = self.cache.get(ctx.guild.id, None)
             channel_cache = guild_cache.get(ctx.channel.id, None)

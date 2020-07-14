@@ -12,14 +12,12 @@ class Core(commands.Cog):
 
     @commands.command(description="Closes the bot.")
     async def exit(self, ctx):
-        await ctx.message.delete()
         print("Closing...")
         await self.bot.close()
         sys.exit()
 
     @commands.command(description="Changes the prefix used for commands.")
     async def change_prefix(self, ctx, prefix: str):
-        await ctx.message.delete()
         config = configparser.ConfigParser()
         file = os.path.join(os.path.dirname(__file__), '..', 'utils', 'config.ini')
         config.read(file), config.set('DISCORD', 'PREFIX', prefix)
