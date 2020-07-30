@@ -25,16 +25,19 @@ class Misc(commands.Cog):
 
     @commands.command(description="Fake types permanently until disabled.")
     async def typing_enable(self, ctx):
+        await ctx.message.delete()
         self.typing = True
         while self.typing:
             await ctx.trigger_typing(), await asyncio.sleep(9)
 
     @commands.command(description="Disables 'typing_enable'.")
     async def typing_disable(self, ctx):
+        await ctx.message.delete()
         self.typing = False
 
     @commands.command(description="Steals avatar from user and changes to it.")
     async def steal_avatar(self, ctx, target: discord.User):
+        await ctx.message.delete()
         if self.avatar is None:
             self.avatar = self.bot.user.avatar_url
         try:
@@ -44,6 +47,7 @@ class Misc(commands.Cog):
 
     @commands.command(description="Resets avatar back to original.")
     async def reset_avatar(self, ctx):
+        await ctx.message.delete()
         try:
             await self.bot.user.edit(password=self.bot.pwd, avatar=await self.avatar.read())
         except discord.HTTPException:

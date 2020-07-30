@@ -9,6 +9,7 @@ class Help(commands.Cog):
 
     @commands.command(description="Shows all commands the bot has.")
     async def help(self, ctx):
+        await ctx.message.delete()
         embed = discord.Embed(color=0x00BFFF)
         embed.set_author(
             name=self.bot.user,

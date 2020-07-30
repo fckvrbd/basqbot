@@ -9,6 +9,7 @@ class Info(commands.Cog):
 
     @commands.command(description="Show info of given user.")
     async def user_info(self, ctx, user: discord.User):
+        await ctx.message.delete()
         embed = discord.Embed(
             title=user.name,
             description=user.id, 
@@ -22,6 +23,7 @@ class Info(commands.Cog):
 
     @commands.command(description="Show info of server.")
     async def server_info(self, ctx):
+        await ctx.message.delete()
         server = ctx.message.guild
         embed = discord.Embed(
             title=server.name,
@@ -39,6 +41,7 @@ class Info(commands.Cog):
 
     @commands.command(description="Show avatar of given user.")
     async def avatar(self, ctx, user: discord.User):
+        await ctx.message.delete()
         embed = discord.Embed(
             title=user.name,
             color=0xFF0000)

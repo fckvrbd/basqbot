@@ -20,6 +20,7 @@ class Purge(commands.Cog):
 
     @commands.command(description="Deletes all messages in guild channels or DM chat.")
     async def purge(self, ctx, limit=float("inf")):
+        await ctx.message.delete()
         if ctx.guild:
             for channel in ctx.guild.text_channels:
                 try:
@@ -35,11 +36,13 @@ class Purge(commands.Cog):
 
     @commands.command(description="Auto-deletes bots user messages after a given time in seconds.")
     async def auto_purge_enable(self, ctx, time=60):
+        await ctx.message.delete()
         self.time = time
         self.bot.add_listener(self.auto_purge, 'on_message')
 
     @commands.command(description="Disables 'auto_purge_enable'.")
     async def auto_purge_disable(self, ctx):
+        await ctx.message.delete()
         self.time = None
         self.bot.remove_listener(self.auto_purge, 'on_message')
 
